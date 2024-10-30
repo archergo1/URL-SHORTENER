@@ -4,28 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>URL SHRINKER</h1>
-    <form action="" method="POST">
-      <label for="fullUrl">URL</label>
-      <input type="url" name="fullUrl" id="fullUrl" />
-      <button type="submit">Shrink</button>
-    </form>
+    <div class="container">
+      <h1>URL SHRINKER</h1>
+      <form action="/shortUrls" method="POST" class="my-4 form-inline">
+        <!-- sr-only -->
+        <label for="fullUrl" class="sr-only">URL</label>
+        <input
+          type="url"
+          required
+          placeholder="url"
+          name="fullUrl"
+          id="fullUrl"
+          class="form-control mr-2"
+        />
+        <button class="btn btn-success" type="submit">Shrink</button>
+      </form>
 
-    <table>
-      <thead>
-        <tr>
-          <th>FULL URL</th>
-          <th>SHORT URL</th>
-          <th>Clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <a href="https://yahoo.com.tw">https://yahoo.com.tw</a>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-stripes table-responsive">
+        <thead>
+          <tr>
+            <th>FULL URL</th>
+            <th>SHORT URL</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% shortUrls.forEach(shortUrl =>{ %>
+          <tr>
+            <td>
+              <a href="<%= shortUrl.full %>"> <%= shortUrl.full %></a>
+            </td>
+            <td>
+              <a href="<%= shortUrl.short %>"><%= shortUrl.short %></a>
+            </td>
+            <td><%= shortUrl.clicks %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
